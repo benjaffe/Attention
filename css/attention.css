@@ -1,0 +1,48 @@
+body{font: 100%/200% "Trebuchet MS", sans-serif;margin: 50px;}
+.demoHeaders {margin-top: 2em;}
+#dialog-link {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
+#dialog-link span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
+#icons {margin: 0;padding: 0;}
+#icons li {margin: 2px;position: relative;padding: 4px 0;cursor: pointer;float: left;list-style: none;}
+#icons span.ui-icon {float: left;margin: 0 4px;}
+.fakewindowcontain .ui-widget-overlay {position: absolute;}
+
+/* -- */
+
+body {background-color: #DDD;margin: 0 auto;max-width: 920px;padding: 0 6%;}
+
+.page-title {text-align: center;color:#666;text-shadow:0 1px 0 #FFF;}
+
+.col {list-style: none;margin:0;padding:0;width:48%;float:left;}
+.col-left{margin-right:4%;}
+
+.list {margin-bottom:10px;position:relative;}
+.ui-accordion-header:not(.ui-accordion-header-active) {font-size:.8em;} /* Collapsed Accordion */
+
+.btn-add-list-item {position:absolute;right:8px;top:-2px;z-index:100;font-size:30px;color:#999;cursor:pointer;}
+.btn-add-list-item:hover {color:#000;}
+
+.list-title {text-align: center;color:#999;font-size:1.2em;}
+
+.list-item {position:relative;}
+.list-item:not(.done):hover .list-item-content {text-decoration: underline;}
+.list-item.done {opacity:0.5;}
+.list-item.done .list-item-content {text-decoration: line-through;}
+
+.list-item .list-item-content {display:inline-block;cursor: pointer;}
+.list-item .checkmark {display:inline-block;width:30px;text-align:center;cursor:pointer;}
+.list-item.done .checkmark {}
+
+.ui-sortable-helper {opacity:0.7;}
+
+.btns-primary {position:absolute;height:100px;bottom:0;}
+.btn-primary {width:100px;height:100px;float:left;margin-right:10px;}
+.new-item {background: #CCC;color:#888;font-size:190px;padding-top: 24px;height: 76px;cursor:pointer;}
+.new-item:hover {color:#222;}
+.trash {background: blue no-repeat url(../images/trashcan.png);background-size:contain;}
+.drop-hover {background: red;}
+
+@media only screen and (max-width : 480px) {
+	body {padding: 0 20px;margin:0;}
+	.col {width:100%;}
+}
