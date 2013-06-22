@@ -29,8 +29,10 @@ $(function() {
 			localStorage.removeItem(this.dateName);
 			this.init();
 		},
-		makeListElem : function(content){
-			return $('<li class="list-item"><div class="checkmark">&#x2714;</div><div class="list-item-content">' + content + '</div></li>');
+		//makes a list-item element for a list
+		makeElem : function(type, content){
+			if (type === 'list-item') return $('<li class="list-item"><div class="checkmark">&#x2714;</div><div class="list-item-content">' + content + '</div></li>');
+			else if (type === 'list') return $('<li class="list"><div class="btn-add-list-item">+</div><div class="accordion"><h2 class="list-title">' + content + '</h2><ul class="list-items"></ul></div></li>');
 		},
 		//rebuilds the view from the data in localStorage
 		updateView : function(){
@@ -58,11 +60,11 @@ $(function() {
 			var data = JSON.parse(localStorage[this.dateName]);
 
 			for (var i = 0; i < data.length; i++) { //big lists
-				var listElem = $('<li class="list"><div class="btn-add-list-item">+</div><div class="accordion"><h2 class="list-title">' + data[i].title + '</h2><ul class="list-items"></ul></div></li>');
+				var listElem = Attention.makeElem('list',data[i].title);
 				$('#col-'+data[i].column).append(listElem);
 				var listItems = $(listElem).find('.list-items');
 				for (var j = 0; j < data[i].items.length; j++) {
-					var listItemElem = Attention.makeListElem(data[i].items[j].title);
+					var listItemElem = Attention.makeElem('list-item', data[i].items[j].title);
 					if (data[i].items[j].done) {
 						listItemElem.addClass('done');
 					}
@@ -70,7 +72,7 @@ $(function() {
 				}
 			}
 			$('.btn-add-list-item').click(function() {
-				var listItemElem = Attention.makeListElem(prompt('Type your item'));
+				var listItemElem = Attention.makeElem('list-item', prompt('Type your item'));
 				$(this).next('.accordion').find('.list-items').append(listItemElem);
 				console.log($(this).find('.list-items'));
 				Attention.updateData();
