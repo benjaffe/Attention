@@ -5,6 +5,7 @@ $(function() {
 		date : undefined,
 		dateName : undefined,
 		initDate : undefined,
+		// sets the current day to today
 		init : function() {
 			this.date = new Date();
 			this.updateView(); //goes to today
@@ -22,8 +23,8 @@ $(function() {
 					},msInDay);
 				}, msUntilMidnight);
 			}
-			
 		},
+		//clears today's changes and starts with a fresh template
 		reset : function() {
 			localStorage.removeItem(this.dateName);
 			this.init();
@@ -31,6 +32,7 @@ $(function() {
 		makeListElem : function(content){
 			return $('<li class="list-item"><div class="checkmark">&#x2714;</div><div class="list-item-content">' + content + '</div></li>');
 		},
+		//rebuilds the view from the data in localStorage
 		updateView : function(){
 			var date = this.date;
 			var currYear = date.getFullYear();
@@ -40,7 +42,7 @@ $(function() {
 			if ((currDate+'').length === 1) currDate = '0' + currDate; //pad with 0's
 			this.dateName = 'Attention-' + currYear + currMonth + currDate; //name of this day's data store
 			if (date*1 === new Date(0)*1) {
-				this.dateName = 'Attention-default'
+				this.dateName = 'Attention-default';
 			}
 			console.log(date);
 			console.log(new Date(0));
@@ -65,10 +67,8 @@ $(function() {
 						listItemElem.addClass('done');
 					}
 					listItems.append(listItemElem);
-				};
-
-			};
-
+				}
+			}
 			$('.btn-add-list-item').click(function() {
 				var listItemElem = Attention.makeListElem(prompt('Type your item'));
 				$(this).next('.accordion').find('.list-items').append(listItemElem);
@@ -97,7 +97,7 @@ $(function() {
 						elem.text($(this).val()).show();
 						$(this).remove();
 						Attention.updateData();
-					});						
+					});
 				}
 			});
 
@@ -106,13 +106,13 @@ $(function() {
 			});
 
 			$('.list-item, .list').mouseup(function() {
-				Attention.updateData();;
+				Attention.updateData();
 			});
 
 
 			this.date.toDateString();
-
 		},
+		//turns the view into data and stores it in localStorage
 		updateData : function(){
 			var that = this;
 			setTimeout(function(){ //need to delay to ensure jQueryUI does its stuff before we do.
@@ -138,11 +138,11 @@ $(function() {
 				console.log(that.dateName);
 				console.log(today);
 			},1);
-
 		},
+		//moves n days into the future
 		moveDate : function(num) {
 			this.date.setDate(this.date.getDate() + num);
-			this.updateView( this.date );
+			this.updateView();
 		},
 		viewDefault : function() {
 			this.date = new Date(0);
@@ -155,11 +155,11 @@ $(function() {
 				title: title,
 				column: $('#col-0').size() > $('#col-1').size() ? 0 : 1,
 				items: []
-			})
+			});
 			localStorage[this.dateName] = JSON.stringify(data);
 			this.updateView();
 		}
-	}
+	};
 
 	Attention.init();
 
@@ -170,7 +170,7 @@ $(function() {
 	$('.new-item').click(function(){
 		var title = prompt("Category Title?\n(ex: Things I Want, Routine, etc)","");
 		if (title && title !== '') Attention.newCategory(title);
-	})
+	});
 
 	$('.trash').droppable({
 		hoverClass: "drop-hover",
@@ -201,7 +201,6 @@ $(function() {
 				elem.remove();
 				Attention.updateData();
 			}
-			
 		}
 	});
 
