@@ -9,11 +9,11 @@ body{font: 100%/200% "Trebuchet MS", sans-serif;margin: 50px;}
 
 /* -- */
 
-body {background-color: #DDD;margin: 0 auto;max-width: 920px;padding: 0 6%;}
+body {position:relative;background-color: #DDD;margin: 0 auto;max-width: 920px;padding: 0 6% 120px;}
 
 .page-title {text-align: center;color:#666;text-shadow:0 1px 0 #FFF;}
 
-.col {list-style: none;margin:0;padding:0;width:48%;float:left;}
+.col {list-style: none;margin:0;padding:0;width:48%;display:inline-block;vertical-align: top;}
 .col-left{margin-right:4%;}
 
 .list {margin-bottom:10px;position:relative;}
@@ -37,12 +37,12 @@ body {background-color: #DDD;margin: 0 auto;max-width: 920px;padding: 0 6%;}
 
 .btns-primary {position:absolute;height:100px;bottom:0;}
 .btn-primary {width:100px;height:100px;float:left;margin-right:10px;}
-.new-item {background: #CCC;color:#888;font-size:190px;padding-top: 24px;height: 76px;cursor:pointer;}
+.new-item {background: #CCC;color:#888;font-size:190px;padding-top: 24px;height: 76px;overflow: hidden;cursor:pointer;}
 .new-item:hover {color:#222;}
 .trash {background: blue no-repeat url(../images/trashcan.png);background-size:contain;}
 .drop-hover {background: red;}
 
 @media only screen and (max-width : 480px) {
-	body {padding: 0 20px;margin:0;}
+	body {padding: 0 20px 100px;margin:0;}
 	.col {width:100%;}
 }
