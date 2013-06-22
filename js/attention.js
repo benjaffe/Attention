@@ -114,7 +114,10 @@ $(function() {
 			});
 
 			$(".checkmark").click(function() {
-				$(this).parent('.list-item').toggleClass("done");
+				var parent = $(this).parent('.list-item');
+				if (!parent.hasClass('ui-sortable-helper')) {
+					parent.toggleClass("done");					
+				}
 			});
 
 			$('.list-item, .list').mouseup(function() {
