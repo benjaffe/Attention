@@ -5,6 +5,7 @@ $(function() {
 		date : undefined,
 		dateName : undefined,
 		initDate : undefined,
+		dateNameEnglish : undefined,
 		// sets the current day to today
 		init : function() {
 			this.date = new Date();
@@ -34,8 +35,12 @@ $(function() {
 			if (type === 'list-item') return $('<li class="list-item"><div class="checkmark">&#x2714;</div><div class="list-item-content">' + content + '</div></li>');
 			else if (type === 'list') return $('<li class="list"><div class="btn-add-list-item">+</div><div class="accordion"><h2 class="list-title">' + content + '</h2><ul class="list-items"></ul></div></li>');
 		},
+		formDateNameEnglish : function() {
+			var orig = this.date.toDateString();
+			return orig;
+		},
 		//rebuilds the view from the data in localStorage
-		updateView : function(){
+		updateView : function() {
 			var date = this.date;
 			var currYear = date.getFullYear();
 			var currMonth = date.getMonth()+1;
@@ -43,8 +48,10 @@ $(function() {
 			if ((currMonth+'').length === 1) currMonth = '0' + currMonth; //pad with 0's
 			if ((currDate+'').length === 1) currDate = '0' + currDate; //pad with 0's
 			this.dateName = 'Attention-' + currYear + currMonth + currDate; //name of this day's data store
+			this.dateNameEnglish = this.formDateNameEnglish();
 			if (date*1 === new Date(0)*1) {
 				this.dateName = 'Attention-default';
+				this.dateNameEnglish = "Default Day";
 			}
 			console.log(date);
 			console.log(new Date(0));
@@ -56,6 +63,7 @@ $(function() {
 			}
 
 			console.log('populating DOM');
+			$('.page-title').text(this.dateNameEnglish);
 			$('.col').html(''); //clear the DOM
 			var data = JSON.parse(localStorage[this.dateName]);
 
@@ -91,7 +99,9 @@ $(function() {
 
 			$(".list-item-content").click(function() {
 				var parentListItem = $(this).parent('.list-item');
-				if (parentListItem.hasClass("done")) {
+				if (parentListItem.hasClass('ui-sortable-helper')) {
+					return false;
+				} else if (parentListItem.hasClass("done")) {
 					parentListItem.toggleClass("done");
 				} else {
 					var elem = $(this).hide();
@@ -206,7 +216,7 @@ $(function() {
 		}
 	});
 
-	$('.trash').click(function() {
+	$('.trash').dblclick(function() {
 		if (Attention.debug) Attention.reset();
 	});
 

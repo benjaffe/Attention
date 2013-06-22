@@ -29,8 +29,9 @@ body {position:relative;background-color: #DDD;margin: 0 auto;max-width: 920px;p
 .list-item.done {opacity:0.5;}
 .list-item.done .list-item-content {text-decoration: line-through;}
 
-.list-item .list-item-content {display:inline-block;cursor: pointer;}
-.list-item .checkmark {display:inline-block;width:30px;text-align:center;cursor:pointer;}
+.list-item .list-item-content {padding-left:25px;cursor: pointer;}
+.list-item .list-item-content + input {position:relative;top:-5px;margin-left:22px;}
+.list-item .checkmark {position:absolute;left:-15px;width:30px;text-align:center;cursor:pointer;}
 .list-item.done .checkmark {}
 
 .ui-sortable-helper {opacity:0.7;}
